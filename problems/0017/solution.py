@@ -33,30 +33,13 @@ for row in tri.split("\n"):
     row=row.lstrip()
     rows.append([int(x) for x in row.split(" ")])
 
-path = [0]
 
-for row in rows[1:]:
-    if row[path[-1]] > row[path[-1]+1]:
-        path.append(path[-1])
-    else:
-        path.append(path[-1]+1)
-
-sumation = 0
-
-for idx, row in enumerate(rows):
-    print(row[path[idx]])
-    sumation += row[path[idx]]
-print()
-print(sumation)
-
+for i in range(-2, -len(rows)-1, -1):
+    print()
+    print(rows[i])
+    for col in range(len(rows[i])):
+        rows[i][col] += max(rows[i+1][col], rows[i+1][col+1])
+        print(col, rows[i][col])
+    print(rows[i])
 
 print(time.time()-t0)
-
-"""
-    1   2
-    2   6
-    3  20
-    4  70
-    5 252
-    6 924
-"""
